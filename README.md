@@ -1,2 +1,2 @@
 # GoogleFormsClone
-This project is brought to you by team DarkPrince(Guttu Sai Abhishek, Sanapati Sumanth Balaji, Mulinti Shaik Wajid) this is CS251 course project.
+This project implements forms for survey management, at present we completed user authentication and terminal client.
