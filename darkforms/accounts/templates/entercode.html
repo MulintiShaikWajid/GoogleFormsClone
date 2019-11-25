@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>Dark Prince Forms</h1>
+  <p>By team Dark Prince</p> 
+</div>
+<div class = "container">
+	<p><a href="{% url 'logout' %}">Logout</a></p>
+	<form action="" method="post">
+		{% csrf_token %}
+		<br>
+		<br>
+		<p>Enter code</p>
+	<input name="code" type="text" style = 'width: 50%; border: none; border-bottom: 2px solid #000000;' pattern="^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$">
+	<br>
+	<br>
+	{% for y in lst %}
+	<p>
+		Please don't play games
+	</p>
+	{% endfor %}
+	<br>
+	<br>
+	
+
+	<input type="submit">
+	</form>
+	</div>
+
+</body>
+</html>

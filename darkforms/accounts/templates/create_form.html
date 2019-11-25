@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Forms</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat|Raleway|Roboto+Condensed&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+<div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>Dark Prince Forms</h1>
+  <p>By team Dark Prince</p> 
+</div>
+<div class="container">
+	<p><a href="{% url 'logout' %}">Logout</a></p>
+	<form action="" method="post" onsubmit="return is_valid();">
+		{% csrf_token %}
+	<div class="container" id = "questions">
+		<br>
+		<input type="text" placeholder="Title of form" style = 'width: 90%; border: none; border-bottom: 3px solid #000000;' name ="title" required>
+		<br>
+		<br>
+		
+		<input type="text" placeholder="Description" style = 'width: 90%; border: none; border-bottom: 2px solid #000000;' name = "description">
+		<br><br>
+		<span>Theme Color:</span><input type="radio" name="color" value="red" id="i_red" ><label for="i_red">Red</label>
+		<input type="radio" name="color" value="blue" id="i_blue"><label for="i_blue">Blue</label>
+		<input type="radio" name="color" value="green" id="i_green" checked><label for="i_green">Green</label>
+		<input type="radio" name="color" value="black" id="i_black"><label for="i_black">Black</label><br><br>
+		<span>Font style:</span><input type="radio" name="font" value="font-family: 'Montserrat', sans-serif" id="a" checked><label for="a" style="font-family: 'Montserrat', sans-serif">Montserrat</label>
+		<input type="radio" name="font" value="font-family: 'Roboto Condensed', sans-serif" id="b"><label for="b" style="font-family: 'Roboto Condensed', sans-serif">Roboto Condensed</label>
+		<input type="radio" name="font" value="font-family: 'Raleway', sans-serif" id="c"><label for="c" style="font-family: 'Raleway', sans-serif">Raleway</label>
+		<input type="radio" name="font" value="font-family: 'Merriweather', serif" id="d"><label for="d" style="font-family: 'Merriweather', serif">Merriweather</label>
+	</div>
+
+	<div class="container-fluid" style="margin-right: 20px">
+		<br>
+	<div class="dropdown" style="text-align: left; margin-top:15px; display: none" id="textoption">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add question type
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" style="text-align: center">
+      <li><a href="#" onclick = "myfunc(1)">E-mail</a></li>
+      <li><a href="#" onclick = "myfunc(2)">Plain Text</a></li>
+      <li><a href="#" onclick = "myfunc(3)">Number</a></li>
+    </ul>
+  </div>
+  <div class = "dropdown" style="text-align: left; margin-top:15px; display: none" id="toggleoption">
+  	<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Keep the next question conditional which disappears if response is No</button>
+  	<span class="caret"></span></button>
+    <ul class="dropdown-menu" style="text-align: center">
+  	<li><a href="#" onclick = "myfunc2(1)">Yes</a></li>
+    <li><a href="#" onclick = "myfunc2(2)">No</a></li>
+	</ul>
+  </div>
+	<button type="button" id = "optionbutton" style = "display:none" class="btn btn-secondary" onclick="addoption(0)">Add Option</button>
+	</div>
+	<div class="dropdown" style="text-align: right; margin-top:15px" id="requiredoption">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add required question
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" style="text-align: center">
+      <li><a href="#" onclick = "addquestion(1,1)">Text</a></li>
+      <li><a href="#" onclick = "addquestion(2,1)">Long Text</a></li>
+      <li><a href="#" onclick = "addquestion(3,1)">Single Choice MCQ</a></li>
+      <li><a href="#" onclick = "addquestion(4,1)">Multi Choice MCQ</a></li>
+      <li><a href="#" onclick = "addquestion(5,1)">Yes/No</a></li>
+      <li><a href="#" onclick = "addquestion(6,1)">Dropdown</a></li>
+      <li><a href="#" onclick = "addquestion(7,1)">File Upload</a></li>
+      <li><a href="#" onclick = "addquestion(8,1)">Rating Scale</a></li>
+    </ul>
+  </div>
+  <div class="dropdown" style="text-align: right; margin-top:15px">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Add optional question
+    <span class="caret"></span></button>
+    <ul class="dropdown-menu" style="text-align: center">
+      <li><a href="#" onclick = "addquestion(1,0)">Text</a></li>
+      <li><a href="#" onclick = "addquestion(2,0)">Long Text</a></li>
+      <li><a href="#" onclick = "addquestion(3,0)">Single Choice MCQ</a></li>
+      <li><a href="#" onclick = "addquestion(4,0)">Multi Choice MCQ</a></li>
+      <li><a href="#" onclick = "addquestion(5,0)">Yes/No</a></li>
+      <li><a href="#" onclick = "addquestion(6,0)">Dropdown</a></li>
+      <li><a href="#" onclick = "addquestion(7,0)">File Upload</a></li>
+      <li><a href="#" onclick = "addquestion(8,0)">Rating Scale</a></li>
+    </ul>
+  </div>
+  <input type="submit" value="Create Form">
+  <br>
+  <br>
+  <br>
+	</form>
+<script>
+	// var app = angular.module('formapp',[]);
+	// app.controller('formctrl', function($scope){
+	// 	$scope.addquestion = function(i){
+	// 		$scope.question = $scope.question + 1;
+	// 		var question_name = $scope.question.toString() + "@" + i.toString();
+	// 		var code = "<br><input type = text name =" + question_name + " required >";
+	// 		$document[0].getElementById("questions") = $document[0].getElementById("questions") + code;
+	// 	}
+	// });
+	var myvar=2;
+	var questionno = 0;
+	var optionno = 0;
+	var present_type=0;
+	var j1 = 0;
+	var myvar2 = "f";
+	var array = [];
+	function is_valid(){
+		if(array[array.length-1]==questionno){
+			alert("A question must follow conditional question");
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
+	function myfunc(x){
+		
+		myvar = x;
+		var i =1;
+		var j =j1;
+		questionno++;
+		present_type =i;
+		var tempo = "";
+		if(myvar == 1){
+			tempo = "E-mail";
+		}
+		if(myvar == 2){
+			tempo = "Plain Text";
+		}
+		if(myvar == 3){
+			tempo = "Number";
+		}
+		var question_name = questionno.toString() + "@" + i.toString() + "@" + j.toString() + "@" + myvar.toString();
+		myvar = 2;
+		var code = "<br><p>Question Number: " +questionno.toString() +" </p><input style = 'width: 70%; border: none; border-bottom: 1px solid #000000;'type = text name =" + question_name + " required >";
+		code = code + "<p>"+tempo + "</p>";
+		var container = document.createElement("p");
+		container.innerHTML = code;
+		document.getElementById("questions").appendChild(container);
+
+		document.getElementById("textoption").style.display="none";
+	}
+	function myfunc2(x){
+		
+		if(x==1){
+		myvar2 = "1";
+		questionno++;
+		array.push(questionno);
+		questionno--;
+		}else{}
+		var i =5;
+	
+		var j=j1;
+		present_type =i;
+		questionno++;
+
+		var question_name = questionno.toString() + "@" + i.toString() + "@" + j.toString() + "@" + myvar2;
+		myvar2 = "f";
+		
+		var code = "<br><p>Question Number: " +questionno.toString() +" </p><input style = 'width: 70%; border: none; border-bottom: 1px solid #000000;'type = text name =" + question_name + " required >";
+		var container = document.createElement("p");
+		container.innerHTML = code;
+		document.getElementById("questions").appendChild(container);
+		document.getElementById("toggleoption").style.display="none";
+		if(x==1){
+		document.getElementById("requiredoption").style.display="none";
+	}
+
+	}
+	function addquestion(i,j){
+		
+			document.getElementById("requiredoption").style.display="block";
+		if(i==1){
+			present_type = 1;
+			document.getElementById("textoption").style.display="block";
+			document.getElementById("optionbutton").style.display="none";
+			j1 = j;
+			document.getElementById("toggleoption").style.display="none";
+		}
+		else if(i == 5){
+				document.getElementById("toggleoption").style.display="block";
+				document.getElementById("textoption").style.display="none";
+			    document.getElementById("optionbutton").style.display="none";
+			    j1=j;
+		}
+
+		else{
+			
+			
+			document.getElementById("toggleoption").style.display="none";
+			document.getElementById("textoption").style.display="none";
+		present_type =i;
+		questionno++;
+		var question_name = questionno.toString() + "@" + i.toString() + "@" + j.toString() + "@" + myvar2;
+		var code = "<br><p>Question Number: " +questionno.toString() +" </p><input style = 'width: 70%; border: none; border-bottom: 1px solid #000000;'type = text name =" + question_name + " required >";
+		var container = document.createElement("p");
+		container.innerHTML = code;
+		document.getElementById("questions").appendChild(container);
+		if(i==7){
+			var option_name = questionno.toString() + "@" + present_type.toString()+"@"+optionno.toString();
+		var code = "<br><p>File Extension(use none for accepting all files):</p><input style = 'width:45%;border: none; border-bottom: 1px solid #000000;'type = text name =" + option_name + " required >";
+		var container = document.createElement("p");
+		container.innerHTML = code;
+		document.getElementById("questions").appendChild(container);
+		}
+		else{}
+		if(i==2||i==7||i==8){
+			document.getElementById("optionbutton").style.display="none";
+		}
+		else{
+			document.getElementById("optionbutton").style.display="block";
+			optionno = 0;
+		}
+	
+
+		}
+	myvar2 = "f";
+	}
+	function addoption(x){
+		if(x == 0){
+		optionno++;
+		var option_name = questionno.toString() + "@" + present_type.toString()+"@"+optionno.toString();
+		var code = "<br><p>Option Number: " +optionno.toString() +" </p><input style = 'width:45%;border: none; border-bottom: 1px solid #000000;'type = text name =" + option_name + " required >";
+		var container = document.createElement("p");
+		container.innerHTML = code;
+		document.getElementById("questions").appendChild(container);
+	}
+	else{
+		optionno++;
+		var option_name = questionno.toString() + "@" + present_type.toString()+"@"+optionno.toString()+"@"+x.toString();
+		var code = "<br><p>Option Number: " +optionno.toString() +" </p><input style = 'width:45%;border: none; border-bottom: 1px solid #000000;'type = text name =" + option_name + " required >";
+		var container = document.createElement("p");
+		container.innerHTML = code;
+		document.getElementById("questions").appendChild(container);
+	}
+	}
+</script>
+</body>
+</html>

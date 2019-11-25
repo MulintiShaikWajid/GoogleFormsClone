@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+  <div class="jumbotron text-center" style="margin-bottom:0">
+  <h1>Dark Prince Forms</h1>
+  <p>By team Dark Prince</p> 
+</div>
+<div class = "container">
+  <h2>Hello {{ user.username }}</h2>
+  <p>
+  	<a href="{% url 'change' %}">Change Password</a>
+  </p>
+  
+  <br>
+  <p>
+    <a href = "{% url 'create-form' %}">New form </a>
+  </p>
+  <br>
+  <p>
+    <a href = "{% url 'enter-code' %}">Answer a survey with code</a>
+  </p>
+  <br>
+  <p>
+    <a href = "{% url 'form-list' %}">My forms</a>
+  </p>
+  <br>
+  <p>
+  	<a href="{% url 'logout' %}">Logout</a>
+  </p>
+</div>
+</body>
+</html>

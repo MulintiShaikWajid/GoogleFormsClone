@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	 <link href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat|Raleway|Roboto+Condensed&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+	
+</script>
+</head>
+<body class = "bdy" style="{{form.font}}">
+	<script>
+	var array=[]; 
+	function addinarray(x){
+		x=parseInt(x);
+		array.push(x);
+	}
+	function myfunc(x,y){
+		if(x==1){
+			var z=y+1;
+			var z1=z.toString();
+			document.getElementById(z1).style.display = "none";
+
+		}else{
+			var z=y+1;
+			var z1=z.toString();
+			document.getElementById(z1).style.display = "block";
+		}
+	}
+	
+	
+</script>
+<div class="jumbotron text-center" style="margin-bottom:0; background-color:{{form.color}}; color:white">
+  <h1>Dark Prince Forms</h1>
+  <p>By team Dark Prince</p> 
+</div>
+
+<div class = "container">
+	<p><a href="{% url 'logout' %}">Logout</a></p>
+	<br>
+	{% if messages %}
+	<ul class = "messages">
+		{% for message in messages %}
+		<li {% if message.error %} class="{{message.error}}" {% endif %}>{{message}}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	<br>
+	<form action="" onsubmit = "is_validate()" method="post" enctype="multipart/form-data" >
+		{% csrf_token %}
+	<div class="container" style="text-align: center">
+	<h1>{{form.title}}</h1>
+	<h3>{{form.description}}</h3>
+	</div>
+	<br>
+	{% for x in mylist %}
+	{% with q=x.0 %}
+
+	{% if q.question_type == 1 %}
+	<div class="container" id="{{q.question_number}}">
+	{% with temp1=q.id|stringformat:"i" %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	{% if q.type == "email" %}
+	<p>Input format E-mail</p>
+	<p><input type="email" name="{{"1@"|add:temp1}}" placeholder="Email Address" style = 'width: 70%; border: none; border-bottom: 2px solid #000000' {{ q.is_required }}></p>
+	{% endif %}
+	{% if q.type == "text" %}
+	<p>Input format plain text</p>
+	<p><input type="text" maxlength="200" name="{{"1@"|add:temp1}}" placeholder="Answer" style = 'width: 70%; border: none; border-bottom: 2px solid #000000' {{ q.is_required }}></p>
+	{% endif %}
+	{% if q.type == "number" %}
+	<p>Input format Number</p>
+	<p><input type="number" name="{{"1@"|add:temp1}}"  placeholder="Number" style = 'width: 70%; border: none; border-bottom: 2px solid #000000' {{ q.is_required }}></p>
+	{% endif %}
+	{% endwith %}
+</div>
+	{% endif %}
+
+	{% if q.question_type == 2 %}
+	<div class="container" id="{{q.question_number}}">
+	{% with temp1=q.id|stringformat:"i" %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	<p><textarea name="{{ "2@"|add:temp1 }}"  placeholder="Answer" rows="5" columns="60" style = 'width: 70%; border: none; border-bottom: 2px solid #000000' {{ q.is_required }}></textarea></p>
+	{% endwith %}
+</div>
+	{% endif %}
+
+	{% if q.question_type == 3 %}
+<div class="container" id="{{q.question_number}}">
+	{% with temp1=q.id|stringformat:"i"  %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	{% for y in x.1 %}
+	{% with temp2=y.id|stringformat:"i" %}
+	<input type="radio" name="{{ "3@"|add:temp1 }}"  value={{y.id}} {{ q.is_required }}>{{y.option}}<br>
+	{% endwith %}
+	{% endfor %}
+	{% endwith %}
+</div>
+	{% endif %}
+
+	{% if q.question_type == 4 %}
+	<div class="container" id="{{q.question_number}}">
+	{% with temp1=q.id|stringformat:"i"  %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	{% for y in x.1 %}
+	{% with temp2=y.id|stringformat:"i" %}
+	<input type="checkbox" name="{{ "4@"|add:temp1|add:"@"|add:temp2 }}" value=0 {{ q.is_required }}>{{y.option}}<br>
+	{% endwith %}
+	{% endfor %}
+	{% endwith %}
+</div>
+	{% endif %}
+
+	{% if q.question_type == 5 %}
+	<div class="container" id="{{q.question_number}}">
+	{% with temp1=q.id|stringformat:"i"  %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	{% if q.is_conditional == "1" %}
+	<script>addinarray({{q.question_number}});</script>
+	<input type="radio" name="{{ "5@"|add:temp1 }}" value=1 onclick="myfunc(0,{{q.question_number}})">Yes<br>
+	<input type="radio" name="{{ "5@"|add:temp1 }}" value=0 onclick="myfunc(1,{{q.question_number}})">No<br>
+	{% endif %}
+	{% if q.is_conditional == "f" %}
+	<input type="radio" name="{{ "5@"|add:temp1 }}" value=1 >Yes<br>
+	<input type="radio" name="{{ "5@"|add:temp1 }}" value=0 >No<br>
+	{% endif %}
+	{% endwith %}
+</div>
+	{% endif %}
+
+	{% if q.question_type == 6 %}
+	<div class="container" id="{{q.question_number}}">
+	{% with temp1=q.id|stringformat:"i"  %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	<select name="{{ "6@"|add:temp1}}" {{ q.is_required }}>
+	{% for y in x.1 %}
+	{% with temp2=y.id|stringformat:"i" %}
+	<option value="{{temp2}}">{{y.option}}</option>
+	{% endwith %}
+	{% endfor %}
+	</select>
+	{% endwith %}
+</div>
+	{% endif %}
+
+	{% if q.question_type == 7 %}
+	<div class="container" id="{{q.question_number}}">
+	{% with temp1=q.id|stringformat:"i"  %}
+	<p>Question {{q.question_number}}:</p>
+	<p>Extension: {{q.extension}}</p>
+	<p>{{q.question}}</p>
+	{% if q.extension == "none" %}
+	<input type="file" name="{{ "7@"|add:temp1}}" {{ q.is_required }}>
+	{% endif %}
+	{% if q.extension != "none" %}
+	<input type="file" name="{{ "7@"|add:temp1}}" {{ q.is_required }} accept="{{q.extension}}">
+	{% endif %}
+	{% endwith %}
+</div>
+	{% endif %}
+
+	{% if q.question_type == 8 %}
+	<div class="container" id="{{q.question_number}}">
+	{% with temp1=q.id|stringformat:"i"  %}
+	<p>Question {{q.question_number}}:</p>
+	<p>{{q.question}}</p>
+	<input type="range" min="0" max="10" value="0" step = "1" name="{{ "8@"|add:temp1}}" {{ q.is_required }}>
+	{% endwith %}
+</div>
+	{% endif %}
+
+	{% endwith %}
+	<hr>
+	{% endfor %}
+	
+	<input type="submit">
+	<br>
+	<br>
+	<br>
+</form>
+</div>
+
+
+
+
+</body>
+</html>
