@@ -8,7 +8,7 @@ This project implements forms for survey management.
 | Mulinti Shaik Wajid       | 180050063 |
 | Sanapathi Sumanth Balaji  | 180050091 |
 
-The dark forms are forms which were inspired by google forms.
+The dark forms takes inspiration from google forms.
 
 These forms are prepared using django, sqlite3.
 Steps to use these services:
