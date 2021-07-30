@@ -1,5 +1,12 @@
 # GoogleFormsClone
+Course project for CS 251.
 This project implements forms for survey management.
+
+| Team Members | Roll No|
+|---|---|
+| Guttu Sai Abhishek        | 180050036 |
+| Mulinti Shaik Wajid       | 180050063 |
+| Sanapathi Sumanth Balaji  | 180050091 |
 
 The dark forms are forms which were inspired by google forms.
 
