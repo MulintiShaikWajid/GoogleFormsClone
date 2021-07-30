@@ -1,5 +1,5 @@
 # GoogleFormsClone
-Course project for CS 251.
+Course project for CS251.
 This project implements forms for survey management.
 
 | Team Members | Roll No|
